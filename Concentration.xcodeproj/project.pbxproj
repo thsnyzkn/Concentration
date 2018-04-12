@@ -14,7 +14,6 @@
 		9C3150FD207B50180043A8D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C3150FB207B50180043A8D9 /* LaunchScreen.storyboard */; };
 		9C31510B207B6CC10043A8D9 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31510A207B6CC10043A8D9 /* Concentration.swift */; };
 		9C31510D207B6D5F0043A8D9 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C31510C207B6D5F0043A8D9 /* Card.swift */; };
-		9C4C8654207F5B6700A4A852 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4C8653207F5B6700A4A852 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		9C3150FE207B50180043A8D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C31510A207B6CC10043A8D9 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		9C31510C207B6D5F0043A8D9 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		9C4C8653207F5B6700A4A852 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,7 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C4C8654207F5B6700A4A852 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,7 +44,6 @@
 			children = (
 				9C3150F1207B50160043A8D9 /* Concentration */,
 				9C3150F0207B50160043A8D9 /* Products */,
-				9C4C8652207F5B6700A4A852 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,14 +76,6 @@
 				9C3150FB207B50180043A8D9 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting File";
-			sourceTree = "<group>";
-		};
-		9C4C8652207F5B6700A4A852 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				9C4C8653207F5B6700A4A852 /* MapKit.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
