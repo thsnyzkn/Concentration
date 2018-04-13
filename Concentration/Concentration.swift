@@ -17,7 +17,7 @@ extension Array{
         }
     }
 }
-class Concentration
+struct Concentration
 {
     private(set) var cards = [Card]()
     private var indexOfOneAndOnlyFaceUpCard: Int?
@@ -48,14 +48,14 @@ class Concentration
     var score = 0
     var flipCount = 0
     var numberOfPairedMatches = 0
-    var isOver:Bool{
+    private var isOver:Bool{
         return numberOfPairedMatches == 8
     }
-    struct Theme
+     struct Theme
     {
-        var emojis :[String]!
-        var cardColor : UIColor!
-        var backgroundColor : UIColor!
+         var emojis :[String]!
+         var cardColor : UIColor!
+         var backgroundColor : UIColor!
         
     }
     var chosen = Theme()
@@ -65,7 +65,7 @@ class Concentration
                   Theme(emojis: ["🥃","🍸","🍺","🍷","🍾","🍹","🥂","🥤","🍵","☕️"], cardColor: #colorLiteral(red: 0.9782849284, green: 0.9958103951, blue: 0.2426556567, alpha: 1), backgroundColor: #colorLiteral(red: 0.6767147856, green: 0.8123832268, blue: 0.9764705896, alpha: 1)),
                   Theme(emojis: ["🍏","🍎","🥒","🍆","🥕","🍌","🥝","🍑","🍒","🍓"], cardColor: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), backgroundColor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
                   Theme(emojis: ["🐬","🐙","🐡","🐠","🐟","🦈","🦐","🦀","🦑","🐳"], cardColor: #colorLiteral(red: 0.06341744434, green: 0.5664875015, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.06717305696, green: 0.9764705896, blue: 0.1164800607, alpha: 1))]
-    func chooseCard (at index : Int){
+   mutating func chooseCard (at index : Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)) : chosen index not in the cards")
         flipCount += 1
         if !cards[index].isMatched{
