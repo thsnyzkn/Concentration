@@ -21,6 +21,30 @@ class Concentration
 {
     var cards = [Card]()
     var indexOfOneAndOnlyFaceUpCard: Int?
+    {
+        get {
+            var foundIndex : Int?
+            for index in cards.indices{
+                if cards[index].isFaceUp{
+                    if foundIndex == nil{
+                        foundIndex = index
+                    }
+                    else{
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set {
+            for index in cards.indices{
+                if cards[index].isFaceUp{
+                    cards[index].previouslyFlipped = true
+                }
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     var score = 0
     var flipCount = 0
     var numberOfPairedMatches = 0
@@ -52,28 +76,23 @@ class Concentration
                     numberOfPairedMatches += 1
                     score += 2
                 }
-                // if cards[index].previouslyFlipped, cards[matchIndex].previouslyFlipped{
-                //  score -= 2
-                //}
-                if cards[index].previouslyFlipped  {
+                else if cards[index].previouslyFlipped,cards[matchIndex].previouslyFlipped{
+                    score -= 2
+                }
+                else if  cards[index].previouslyFlipped {
                     score -= 1
                 }
-                if  cards[matchIndex].previouslyFlipped {
+                else if  cards[matchIndex].previouslyFlipped {
                     score -= 1
                 }
                 
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
+                
             } else{
                 //either no cards or 2 cards are face up
-                for flipDownIndex in cards.indices{
-                    if cards[flipDownIndex].isFaceUp{
-                        cards[flipDownIndex].previouslyFlipped = true
-                    }
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
+                
                 indexOfOneAndOnlyFaceUpCard = index
+                
             }
         }
         
