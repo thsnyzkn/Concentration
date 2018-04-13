@@ -19,8 +19,8 @@ extension Array{
 }
 class Concentration
 {
-    var cards = [Card]()
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    private(set) var cards = [Card]()
+    private var indexOfOneAndOnlyFaceUpCard: Int?
     {
         get {
             var foundIndex : Int?
@@ -66,6 +66,7 @@ class Concentration
                   Theme(emojis: ["🍏","🍎","🥒","🍆","🥕","🍌","🥝","🍑","🍒","🍓"], cardColor: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), backgroundColor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
                   Theme(emojis: ["🐬","🐙","🐡","🐠","🐟","🦈","🦐","🦀","🦑","🐳"], cardColor: #colorLiteral(red: 0.06341744434, green: 0.5664875015, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.06717305696, green: 0.9764705896, blue: 0.1164800607, alpha: 1))]
     func chooseCard (at index : Int){
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)) : chosen index not in the cards")
         flipCount += 1
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
@@ -98,10 +99,9 @@ class Concentration
         
     }
     init(numberOfPairsOfCards : Int){
+        assert(numberOfPairsOfCards > 0, "Concentration.init(\(numberOfPairsOfCards)) : must have at least one pair of cards ")
         let randomInex = Int(arc4random_uniform(UInt32(themes.count)))
         chosen = themes[randomInex]
-        
-        
         for _ in 0..<numberOfPairsOfCards{
             let card = Card()
             cards += [card, card]

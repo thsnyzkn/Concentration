@@ -9,16 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
     var numberOfPairsOfCards: Int {
         return (cardButtons.count + 1) / 2 
     }
     
-    @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet var cardButtons: [UIButton]!
-    @IBOutlet weak var newGameButton: UIButton!
-    override func viewDidLoad() {
+    @IBOutlet private weak var scoreLabel: UILabel!
+    @IBOutlet private var cardButtons: [UIButton]!
+    @IBOutlet private weak var newGameButton: UIButton!
+    override  func viewDidLoad() {
         game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
         for button in cardButtons {
             button.backgroundColor = game.chosen.cardColor
@@ -27,13 +27,13 @@ class ViewController: UIViewController {
         scoreLabel.textColor = game.chosen.cardColor
         flipCountLabel.textColor = game.chosen.cardColor
     }
-    @IBAction func createNewGame(_ sender: UIButton) {
+    @IBAction private func createNewGame(_ sender: UIButton) {
         flipCountLabel.text = "Flips: \(0)"
         scoreLabel.text = "Score: \(0)"
         game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
         updateViewFromModel()
     }
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         }
         
     }
-    func updateViewFromModel(){
+    private func  updateViewFromModel(){
         for index in cardButtons.indices{
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -67,8 +67,8 @@ class ViewController: UIViewController {
         }
     }
     
-    var emoji = [Int:String]()
-    func emoji (for card: Card) -> String{
+    private var emoji = [Int:String]()
+    private func emoji (for card: Card) -> String{
         if emoji[card.identifier] == nil, game.chosen.emojis.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(game.chosen.emojis.count)))
             emoji[card.identifier] = game.chosen.emojis.remove(at: randomIndex)
@@ -79,6 +79,8 @@ class ViewController: UIViewController {
    
     
     @IBOutlet weak var flipCountLabel: UILabel!
+    
+  
     
 }
 
