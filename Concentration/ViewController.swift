@@ -68,12 +68,12 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     private func emoji (for card: Card) -> String{
-        if emoji[card.identifier] == nil, game.chosen.emojis.count > 0 {
-            emoji[card.identifier] = game.chosen.emojis.remove(at: game.chosen.emojis.count.arc4random)
+        if emoji[card] == nil, game.chosen.emojis.count > 0 {
+            emoji[card] = game.chosen.emojis.remove(at: game.chosen.emojis.count.arc4random)
         }
-            return emoji[card.identifier] ?? "?"
+            return emoji[card] ?? "?"
         }
     
    

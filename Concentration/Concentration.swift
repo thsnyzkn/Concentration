@@ -48,7 +48,7 @@ struct Concentration
     var score = 0
     var flipCount = 0
     var numberOfPairedMatches = 0
-    private var isOver:Bool{
+    var isOver:Bool{
         return numberOfPairedMatches == 8
     }
      struct Theme
@@ -71,7 +71,7 @@ struct Concentration
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
-                if cards[matchIndex].identifier == cards[index].identifier{
+                if cards[matchIndex] == cards[index]{
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                     numberOfPairedMatches += 1
