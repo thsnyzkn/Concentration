@@ -38,7 +38,15 @@ class ViewController: UIViewController {
         if let cardNumber = cardButtons.index(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
-            flipCountLabel.text = "Flips: \(game.flipCount)"
+            let attributes: [NSAttributedStringKey : Any] = [
+                .strokeWidth :5.0,
+                .strokeColor : game.chosen.cardColor
+            ]
+            
+            let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
+                
+            
+            flipCountLabel.attributedText = attributedString
             scoreLabel.text = "Score: \(game.score)"
             
         } else {
@@ -71,7 +79,8 @@ class ViewController: UIViewController {
     private var emoji = [Card:String]()
     private func emoji (for card: Card) -> String{
         if emoji[card] == nil, game.chosen.emojis.count > 0 {
-            emoji[card] = game.chosen.emojis.remove(at: game.chosen.emojis.count.arc4random)
+            let randomStringIndex = game.chosen.emojis.index(game.chosen.emojis.startIndex, offsetBy: game.chosen.emojis.count.arc4random)
+            emoji[card] = String(game.chosen.emojis.remove(at: randomStringIndex))
         }
             return emoji[card] ?? "?"
         }

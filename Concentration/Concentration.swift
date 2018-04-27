@@ -23,18 +23,7 @@ struct Concentration
     private var indexOfOneAndOnlyFaceUpCard: Int?
     {
         get {
-            var foundIndex : Int?
-            for index in cards.indices{
-                if cards[index].isFaceUp{
-                    if foundIndex == nil{
-                        foundIndex = index
-                    }
-                    else{
-                        return nil
-                    }
-                }
-            }
-            return foundIndex
+            return cards.indices.filter{cards[$0].isFaceUp}.oneAndOnly
         }
         set {
             for index in cards.indices{
@@ -53,18 +42,18 @@ struct Concentration
     }
      struct Theme
     {
-         var emojis :[String]!
+        var emojis : String!
          var cardColor : UIColor!
          var backgroundColor : UIColor!
         
     }
     var chosen = Theme()
-    var themes = [Theme(emojis: ["👻","👹","😈","🎃","🍭","🍬","😱","🤡","☠️","🕸"], cardColor: #colorLiteral(red: 1, green: 0.5834846681, blue: 0.1984327281, alpha: 1), backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
-                  Theme(emojis: ["🐣","😘","🧐","🤓","😔","🤫","🤭","🐤","🍇","🥜"], cardColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1), backgroundColor: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)),
-                  Theme(emojis: ["⚽️","🏀","🏈","⚾️","🎾","🎱","🏓","🏒","🥊","🎿"], cardColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), backgroundColor: #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)),
-                  Theme(emojis: ["🥃","🍸","🍺","🍷","🍾","🍹","🥂","🥤","🍵","☕️"], cardColor: #colorLiteral(red: 0.9782849284, green: 0.9958103951, blue: 0.2426556567, alpha: 1), backgroundColor: #colorLiteral(red: 0.6767147856, green: 0.8123832268, blue: 0.9764705896, alpha: 1)),
-                  Theme(emojis: ["🍏","🍎","🥒","🍆","🥕","🍌","🥝","🍑","🍒","🍓"], cardColor: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), backgroundColor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
-                  Theme(emojis: ["🐬","🐙","🐡","🐠","🐟","🦈","🦐","🦀","🦑","🐳"], cardColor: #colorLiteral(red: 0.06341744434, green: 0.5664875015, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.06717305696, green: 0.9764705896, blue: 0.1164800607, alpha: 1))]
+    var themes = [Theme(emojis: "👻👹😈🎃🍭🍬😱🤡☠️🕸", cardColor: #colorLiteral(red: 1, green: 0.5834846681, blue: 0.1984327281, alpha: 1), backgroundColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)),
+                  Theme(emojis: "🐣😘🧐🤓😔🤫🤭🐤🍇🥜", cardColor: #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1), backgroundColor: #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)),
+                  Theme(emojis: "⚽️🏀🏈⚾️🎾🎱🏓🏒🥊🎿", cardColor: #colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1), backgroundColor: #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)),
+                  Theme(emojis: "🥃🍸🍺🍷🍾🍹🥂🥤🍵☕️", cardColor: #colorLiteral(red: 0.9782849284, green: 0.9958103951, blue: 0.2426556567, alpha: 1), backgroundColor: #colorLiteral(red: 0.6767147856, green: 0.8123832268, blue: 0.9764705896, alpha: 1)),
+                  Theme(emojis: "🍏🍎🥒🍆🥕🍌🥝🍑🍒🍓", cardColor: #colorLiteral(red: 0.7254902124, green: 0.4784313738, blue: 0.09803921729, alpha: 1), backgroundColor: #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)),
+                  Theme(emojis: "🐬🐙🐡🐠🐟🦈🦐🦀🦑🐳", cardColor: #colorLiteral(red: 0.06341744434, green: 0.5664875015, blue: 1, alpha: 1), backgroundColor: #colorLiteral(red: 0.06717305696, green: 0.9764705896, blue: 0.1164800607, alpha: 1))]
    mutating func chooseCard (at index : Int){
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)) : chosen index not in the cards")
         flipCount += 1
@@ -111,4 +100,9 @@ struct Concentration
         
     }
     
+}
+extension Collection {
+    var oneAndOnly: Element? {
+        return count == 1 ? first:nil
+    }
 }
